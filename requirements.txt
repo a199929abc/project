@@ -1,0 +1,6 @@
+flask
+datetime
+uuid
+Flask-SQLAlchemy
+flask-jwt-extended
+PyMySQL
