@@ -1,0 +1,58 @@
+@startuml
+!define primary_key(x) <b><color:#b8861b><&key></color> x</b>
+!define foreign_key(x) <color:#aaaaaa><&key></color> x
+!define column(x) <color:#efefef><&media-record></color> x
+!define table(x) entity x << (T, white) >>
+Class User {
+    address: Address
+    customerRegisterDate: Date
+    dateOfBirth: Date
+    email: String
+    emailAlternate: String
+    firstName: String
+    fullName: String
+    gender: String
+    id: String 
+    lastName: String
+    notes: array
+    passwordPhrase: String
+    registerIP: String
+    phone: String
+    role: String
+    type: String
+    additionalInfo: ArrayList<K, V>
+}
+
+Class Address {
+    id: String
+    address1: String
+    address2: String
+    city: String
+    country: String
+    state: String
+    zipCode: String
+}
+
+Class UserAuth {
+    id: String
+    password: String
+    email: String
+    token: String
+    tokenExpire: String
+}
+
+Class AdditionalInfo {
+    id: String
+    futureFieldToAdd: String
+}
+
+UserAuth "1" o-- "1" User
+User "1" o-- "1" Address
+
+table( user ) {
+  primary_key( id ): UUID 
+  column( isActive ): BOOLEAN 
+  foreign_key( cityId ): INTEGER <<FK>>
+}
+
+@enduml
