@@ -1,0 +1,49 @@
+@startuml
+Class User {
+    address: Address
+    customerRegisterDate: Date
+    dateOfBirth: Date
+    email: String
+    emailAlternate: String
+    firstName: String
+    fullName: String
+    gender: String
+    id: String 
+    lastName: String
+    notes: array
+    passwordPhrase: String
+    registerIP: String
+    phone: String
+    role: String
+    type: String
+    avatar: String
+    avatarLarge: String
+    additionalInfo: ArrayList<K, V>
+}
+
+Class Address {
+    id: String
+    address1: String
+    address2: String
+    city: String
+    country: String
+    state: String
+    zipCode: String
+}
+
+Class UserAuth {
+    id: String
+    password: String
+    email: String
+    token: String
+    tokenExpire: String
+}
+
+Class AdditionalInfo {
+    id: String
+    futureFieldToAdd: String
+}
+
+UserAuth "1" o-- "1" User
+User "1" o-- "1" Address
+@enduml
