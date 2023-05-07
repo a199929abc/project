@@ -10,15 +10,19 @@ db = SQLAlchemy(app)
 
 class UserAuth(db.Model):
     __tablename__ = 'user_auth'
+
     id = db.Column(db.Integer, primary_key=True)
     password = db.Column(db.String(255))
     email = db.Column(db.String(100))
     token = db.Column(db.String(255))
+    token_expire = db.Column(db.DATETIME)
     
     def __repr__(self):
         return '<UserAuth %r>' % self.id
-    
+
 class User(db.Model):
+    __tablename__ = 'user'
+
     id = db.Column(db.String(36), primary_key=True)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
@@ -27,28 +31,32 @@ class User(db.Model):
     email_alternate = db.Column(db.String(100))
     phone = db.Column(db.String(20))
     address_id = db.Column(db.String(36), db.ForeignKey('address.id'), nullable=False)
-    gender = db.Column(db.String(10))
+    gender = db.Column(db.String(5))
     password_phrase = db.Column(db.String(100), nullable=False)
     register_ip = db.Column(db.String(15), nullable=False)
-    role = db.Column(db.String(20), nullable=False)
-    type = db.Column(db.String(20), nullable=False)
+    role = db.Column(db.String(15), nullable=False)
+    type = db.Column(db.String(15), nullable=False)
     avatar = db.Column(db.String(200))
     avatar_large = db.Column(db.String(200))
     address_id = db.Column(db.Integer, db.ForeignKey('address.id'))
+    note = db.Column(db.json)
+    additional_info = db.Column(db.json)
+    date_of_birth: db.Column(db.DATETIME)      
+    customer_register_date: db.Column(db.DATETIME)
+
+
     def __repr__(self):
         return '<User %r>' % self.id
 
 class Address(db.Model):
     __tablename__ = 'address'
 
-    # Columns
-    
     id = db.Column(db.Integer, primary_key=True)
     address1 = db.Column(db.String(100), nullable=False)
     address2 = db.Column(db.String(100), nullable=False)
     street = db.Column(db.String(100), nullable=False)
     city = db.Column(db.String(50), nullable=False)
-    state = db.Column(db.String(50), nullable=False)
+    state = db.Column(db.String(20), nullable=False)
     zipcode = db.Column(db.String(10), nullable=False)
     unit = db.Column(db.String(5), nullable=False)
     country = db.Column(db.String(20), nullable=False)
