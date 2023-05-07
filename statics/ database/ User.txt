@@ -1,0 +1,52 @@
+@startuml
+!define primary_key(x) <b><color:#b8861b><&key></color> x</b>
+!define foreign_key(x) <color:#aaaaaa><&key></color> x
+!define column(x) <color:#efefef><&media-record></color> x
+!define table(x) entity x << (T, white) >>
+
+table( user ) {
+    primary_key( id ): String(36) UUID     
+    first_name: String (50) 
+    last_name: String (50)  
+    full_name: String (101) 
+    email: String (100)    
+    email_alternate: String (100) 
+    phone: String (20)     
+    primary_key( address_id ): String(36)    
+    date_of_birth: DateTime      
+    customer_register_date: DateTime 
+    gender: String (10)    
+    password_phrase: String (255) 
+    register_ip: String (20) 
+    notes: JSON          
+    role: String (50)      
+    type: String (50)
+    avatar: String(200)
+    avatar_large: String(200)
+    additionalInfo: JSON
+}
+
+table( user_auth ) {
+    primary_key( id ): String(36) UUID
+    password: String(64)
+    email: String(100)
+    token: String(300)
+    token_expire: DateTime
+}
+
+table( address ) {
+    primary_key( address_id ): String(36) UUID
+    address1: String(100)
+    address2: String(100)
+    city: String(100)
+    state: String(20)
+    province: String(20)
+    zip_code: String(10)
+    unit: String(5)
+    country: String(20)
+}
+
+user_auth ||..|| user
+user ||..o{ address
+
+@enduml
