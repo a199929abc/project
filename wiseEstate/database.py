@@ -38,12 +38,10 @@ class User(db.Model):
     type = db.Column(db.String(15), nullable=False)
     avatar = db.Column(db.String(200))
     avatar_large = db.Column(db.String(200))
-    address_id = db.Column(db.Integer, db.ForeignKey('address.id'))
     note = db.Column(db.json)
     additional_info = db.Column(db.json)
     date_of_birth: db.Column(db.DATETIME)      
     customer_register_date: db.Column(db.DATETIME)
-
 
     def __repr__(self):
         return '<User %r>' % self.id
